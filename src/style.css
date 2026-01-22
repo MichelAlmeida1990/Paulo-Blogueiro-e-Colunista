@@ -153,6 +153,29 @@ nav a:hover {
   box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
 }
 
+.mute-toggle {
+  position: absolute;
+  bottom: 30px;
+  right: 5%;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.mute-toggle:hover {
+  background: var(--accent-gold);
+  color: #000;
+}
+
 /* Sections */
 section {
   padding: 8rem 0;

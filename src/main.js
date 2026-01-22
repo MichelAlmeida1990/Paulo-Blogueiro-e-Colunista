@@ -84,14 +84,30 @@ async function loadBlogPosts() {
 // Video Playback Handling (handle autoplay with/without sound)
 function setupHeroVideo() {
   const video = document.getElementById('hero-video');
-  if (!video) return;
+  const toggleBtn = document.getElementById('video-mute-toggle');
+  if (!video || !toggleBtn) return;
 
-  // Attempt to play with sound
-  video.play().catch(error => {
-    console.log("Autoplay with sound blocked, falling back to muted autoplay.");
-    video.muted = true;
-    video.play();
+  const muteIcon = toggleBtn.querySelector('.mute-icon');
+  const unmuteIcon = toggleBtn.querySelector('.unmute-icon');
+
+  // Initial state (browsers usually require starting muted for autoplay)
+  video.muted = true;
+  
+  toggleBtn.addEventListener('click', () => {
+    video.muted = !video.muted;
+    if (video.muted) {
+      muteIcon.style.display = 'block';
+      unmuteIcon.style.display = 'none';
+    } else {
+      muteIcon.style.display = 'none';
+      unmuteIcon.style.display = 'block';
+      // Safety check to ensure it's playing
+      video.play();
+    }
   });
+
+  // Start playing (muted by default to ensure success)
+  video.play().catch(console.error);
 }
 
 // Load on page load
