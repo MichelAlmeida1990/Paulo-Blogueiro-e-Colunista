@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Paulo Agostinho</title>
+  <link rel="stylesheet" href="./src/style.css">
+  <style>
+    .admin-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    
+    .admin-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      padding: 3rem;
+      max-width: 500px;
+      width: 100%;
+    }
+    
+    .admin-box h1 {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--accent-gold);
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+    }
+    
+    .form-group input {
+      width: 100%;
+      padding: 1rem;
+      background: var(--bg-dark);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-light);
+      font-size: 1rem;
+      font-family: var(--font-primary);
+    }
+    
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--accent-gold);
+    }
+    
+    .btn-login {
+      width: 100%;
+      padding: 1.2rem;
+      background: var(--accent-gold);
+      color: #000;
+      border: none;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+    
+    .btn-login:hover {
+      background: #c29d2e;
+    }
+    
+    .error-message {
+      background: rgba(255, 0, 0, 0.1);
+      border: 1px solid rgba(255, 0, 0, 0.3);
+      color: #ff6b6b;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-container">
+    <div class="admin-box">
+      <h1>Área Restrita</h1>
+      <div id="error-message" class="error-message"></div>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="username">Usuário</label>
+          <input type="text" id="username" required autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label for="password">Senha</label>
+          <input type="password" id="password" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn-login">Entrar</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Simple authentication (for demo - in production use proper backend authentication)
+    const ADMIN_CREDENTIALS = {
+      username: 'paulo',
+      password: 'admin2026'
+    };
+
+    document.getElementById('login-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const errorMessage = document.getElementById('error-message');
+      
+      if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+        localStorage.setItem('adminAuth', 'true');
+        window.location.href = '/admin-dashboard.html';
+      } else {
+        errorMessage.textContent = 'Credenciais inválidas. Tente novamente.';
+        errorMessage.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
