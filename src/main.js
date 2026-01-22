@@ -81,7 +81,21 @@ async function loadBlogPosts() {
   }
 }
 
+// Video Playback Handling (handle autoplay with/without sound)
+function setupHeroVideo() {
+  const video = document.getElementById('hero-video');
+  if (!video) return;
+
+  // Attempt to play with sound
+  video.play().catch(error => {
+    console.log("Autoplay with sound blocked, falling back to muted autoplay.");
+    video.muted = true;
+    video.play();
+  });
+}
+
 // Load on page load
 loadBlogPosts();
+setupHeroVideo();
 
 console.log('Paulo Agostinho Website Loaded');
